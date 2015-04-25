@@ -1,0 +1,14 @@
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\bin\Debug\EFFrameTest2.Model.dll
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\bin\Debug\EntityFramework.dll
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\bin\Debug\EntityFramework.SqlServer.dll
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\bin\Debug\EFFrameTest2.Model.pdb
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\bin\Debug\EntityFramework.xml
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\bin\Debug\EntityFramework.SqlServer.xml
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\obj\Debug\ConsoleApplication1.Migrations.adduser.resources
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\obj\Debug\ConsoleApplication1.csproj.GenerateResource.Cache
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+E:\其他文件\Test\EFFrameTest\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb

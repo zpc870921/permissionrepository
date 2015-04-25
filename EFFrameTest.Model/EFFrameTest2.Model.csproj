@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A15BAD14-FFE2-4036-8980-94DB097A039A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EFFrameTest2.Model</RootNamespace>
+    <AssemblyName>EFFrameTest2.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\TestDistributeApp\WebApplication1\Assembly\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Entites\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Criteria\ContactCriteria.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="Entites\Activity.cs" />
+    <Compile Include="Entites\Address.cs" />
+    <Compile Include="Entites\Category.cs" />
+    <Compile Include="Entites\Destination.cs" />
+    <Compile Include="Entites\Employee.cs" />
+    <Compile Include="Entites\Lodging.cs" />
+    <Compile Include="Entites\PermissionModule.cs" />
+    <Compile Include="Entites\PermissionReRoleModule.cs" />
+    <Compile Include="Entites\PermissionRole.cs" />
+    <Compile Include="Entites\Person.cs" />
+    <Compile Include="Entites\Contact.cs" />
+    <Compile Include="Entites\Pagination.cs" />
+    <Compile Include="Entites\PersonPhoto.cs" />
+    <Compile Include="Entites\Post.cs" />
+    <Compile Include="Entites\Product.cs" />
+    <Compile Include="Entites\ProductNM.cs" />
+    <Compile Include="Entites\ReferenceProduct.cs" />
+    <Compile Include="Entites\Role.cs" />
+    <Compile Include="Entites\Blog.cs" />
+    <Compile Include="Entites\Tag.cs" />
+    <Compile Include="Entites\User.cs" />
+    <Compile Include="Entites\UserReRole.cs" />
+    <Compile Include="Enum\ProductStatus.cs" />
+    <Compile Include="Enum\UserStatus.cs" />
+    <Compile Include="IContact.cs" />
+    <Compile Include="ILodging.cs" />
+    <Compile Include="IPermission.cs" />
+    <Compile Include="IProduct.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ExtendFunc.cs" />
+    <Compile Include="Utils\Extension.cs" />
+    <Compile Include="Utils\PredicateExtensions.cs" />
+    <Compile Include="Utils\QueryableHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Entites\app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

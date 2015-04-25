@@ -1,0 +1,37 @@
+﻿<#+
+// <copyright file="RePositoryTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+//###-------邹鹏诚-------###
+//###------2014-5-20-----###
+//###-----地点于天通苑----###
+
+
+public class RepositoryTemplate : CSharpTemplate
+{
+	private string entityName;
+
+	public RepositoryTemplate(string entityName){
+		this.entityName=entityName;
+	}
+	public override string TransformText()
+	{
+		//base.TransformText();
+#>
+using EFFrameTest2.Data.Infrastructure;
+using EFFrameTest2.Model.Entites;
+namespace EFFrameTest2.Data
+{
+	public partial class <#=entityName#>Repostory:RepostoryBase<<#=entityName#>>,I<#=entityName#>Repostory
+	{
+		public <#=entityName#>Repostory(IDatabaseFactory databaseFactory):base(databaseFactory){
+			
+		}
+	}
+	public partial interface I<#=entityName#>Repostory:IRepostory<<#=entityName#>>{}
+}
+<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>

@@ -1,0 +1,161 @@
+﻿@using JsTreeTest.Models
+@{
+    ViewBag.Title = "SetReRoleModule";
+}
+@model ReRoleModuleModel
+<link href="~/Scripts/jquery.JsTree/themes/default/style.css" rel="stylesheet" />
+<style type="text/css">
+    #treeModule span.set {
+        padding: 4px;
+        color: blueviolet;
+        background: #ebe0e0;
+        margin-right: 3px;
+        border-right: solid 1px #fff;
+    }
+    #treeModule li{
+        //padding:5px;
+    }
+</style>
+<h2>设置角色权限</h2>
+<ul class="breadcrumb hints">
+    <li><a href="#">首页</a> </li>
+    <li><a href="#">系统管理</a></li>
+    <li class="active">模块列表</li>
+    <li class="pull-right" id="btnSaveMove" style="margin-left: 10px;"><a href="javascript:void(0);" class="btn btn-warning">保存更改</a></li>
+    <li class="pull-right" style="margin-left:10px;"><a href="javascript:void(0);" id="moduleAdd" class="btn btn-primary">添加新模块</a></li>
+    <li class="pull-right" style="margin-left:10px;"><a href="javascript:void(0);" id="moduleEdit" class="btn btn-primary">修改模块</a></li>
+    <li class="pull-right" style="margin-left:10px;"><a href="javascript:void(0);" id="moduleDel" class="btn btn-primary">删除模块</a></li>
+    <li class="pull-right" style="margin-left:10px;"><a href="@Url.Action("roles")" id="moduleAdd" class="btn btn-primary">角色列表</a></li>
+    <li class="pull-right" style="margin-left:10px;"><a href="@Url.Action("list","user")" id="moduleEdit" class="btn btn-primary">用户列表</a></li>
+</ul>
+<div id="treeModule" data-roleid="@Model.Role.Id">
+
+</div>
+
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary" id="btnSave">保存更改</button>
+    <button type="button" class="btn">取消</button>
+</div>
+
+<script type="text/x-jquery-tmpl" id="itemtmpl">
+    <li class="dev-treeNode {{if ChildNodes}}jstree-closed{{/if}}" data-id="${Id}">
+        <a href="javascript:void(0);">${Name}</a>{{if Url}}（${Url}）{{/if}}
+        @{
+            foreach(var item in Model.OptCodeEnum.Keys)
+        {
+            @:{{if renderItem(OptCode,'@item')}}
+        <span class="set">
+            @Model.OptCodeEnum[item]
+            <select data-id="@item" data-moduleid="${Id}">
+                @foreach (var scope in Model.OptScopeEnum)
+                {
+                    <option value="@scope.Key">@scope.Value</option>
+                }
+            </select>
+        </span>
+            @:{{/if}}
+        }
+        }
+    </li>
+</script>
+
+@section scripts{
+<script src="~/Scripts/jquery.tmpl.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.JsTree/jquery.jstree.js"></script>
+<script src="~/Scripts/form2js.js"></script>
+    <script type="text/javascript">
+        function renderItem(code,val)
+        {
+            if ($.inArray(val, code.split(','))!=-1)
+            {
+                return true;
+            }
+            return false;
+        }
+      
+        $(function () {
+            var roleId=$("#treeModule").data("roleid");
+            //保存
+            $("#btnSave").click(function () {
+                var arr = [];
+                $("select", "#treeModule").each(function (i, v) {
+                    var obj = {
+                        RoleId: roleId,
+                        ModuleId: $(this).data("moduleid"),
+                        FuncCode:$(this).data("id") ,
+                        OptScope:$(this).val()
+                    };
+                    arr.push(obj);
+                });
+                if (arr.length > 0)
+                {
+                    $.ajax({
+                        type: "POST",
+                        url: '/TestJsTree/System/SavePermission',
+                        dataType: "json",
+                        contentType:"application/json;charset=utf-8",
+                        data: JSON.stringify({ tree: arr, roleid: roleId }),
+                        success: function (d) {
+                            alert('保存成功');
+                        },
+                        error: function (e) {
+                            alert(e.responseText);
+                        }
+                    });
+                }
+            });
+
+            $("#treeModule").jstree({
+                core: {
+                    "initially_open":['root_treeModule']
+                },
+                "plugins": ['themes', "html_data", "ui", "crrm", "dnd", "types"],
+                "html_data": {
+                    "data": '<li class="jstree-closed" data-id="0" id="root_treeModule"><a href="javascript:void(0);">模块列表</a></li>',
+                    "ajax": {
+                        "url": '/TestJsTree/System/Modulechildren',
+                        "data": function (n) {
+                            return {
+                                root: $(n).data("id")
+                            };
+                        },
+                        "success": function (ret) {
+                            if (ret == '' || ret == "[]") {
+                                return '';
+                            }
+                            var module = JSON.parse(ret);
+                            return $("#itemtmpl").tmpl(module);
+                        }
+                    }
+                }
+            }).on('loaded.jstree', function (e, d) {
+                $(this).jstree("open_all");
+            }).on("load_node.jstree", function (e, d) {
+                debugger
+                var roleid = $(this).data("roleid");
+                var obj = d.rslt.obj;
+                if (obj==-1) {
+                    return;
+                }
+                
+                $("li", obj).each(function (i, v) {
+                    var moduleid = $(this).data("id");
+                    if (0 == moduleid) {
+                        return;
+                    }
+                    var that = $(this);
+                    $.post('/TestJsTree/System/GetByModuleAndRole', { roleid: roleid, moduleid: moduleid }, function (ret) {
+                        if(!ret||ret.length==0)
+                        {
+                            return;
+                        }
+                        $(ret).each(function (i,v) {
+                            $("select[data-id='" + v.FuncCode + "']", that).val(v.OptScope);
+                        });
+                    });
+                });
+            });
+        })
+    </script>
+}

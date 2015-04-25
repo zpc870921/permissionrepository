@@ -1,0 +1,20 @@
+﻿@using EFFrameTest2.Model.Entites;
+@using JsTreeTest.Models.Enum;
+@{
+    ViewBag.Title = "CustomerMgr";
+}
+
+<h2>CustomerMgr</h2>
+
+
+
+@{
+    IList<PermissionReRoleModule> funcList;
+    if (null != ViewBag.funclist)
+    {
+        funcList = ViewBag.funclist as IList<PermissionReRoleModule>;
+        if (null != funcList && funcList.Any(f=>f.FuncCode==(int)PageOperation.Add)) { 
+            <input type="button" value="添加" />       
+        }
+    }
+}

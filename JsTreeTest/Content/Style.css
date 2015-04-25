@@ -1,0 +1,284 @@
+﻿ /*Pager*/
+    .pages {
+        margin: 10px 0px;
+    }
+
+        .pages li {
+            float: left;
+            margin-left: 5px;
+            display: inline;
+            height: 25px;
+            line-height: 25px;
+        }
+
+            .pages li a {
+                display: block;
+                min-width: 20px;
+                height: 20px;
+                line-height: 20px;
+                border: 1px solid #d3d3d3;
+                text-decoration: none;
+                color: #5a5a5a;
+                text-align: center;
+                float: left;
+                margin-left: 4px;
+                padding-left: 2px;
+                padding-right: 2px;
+            }
+
+                .pages li a.pre {
+                    display: block;
+                    width: 65px;
+                    height: 20px;
+                    border: 1px solid #d3d3d3;
+                    text-decoration: none;
+                    color: #5a5a5a;
+                    text-align: center;
+                    background-position: 2px;
+                }
+
+                .pages li a.next {
+                    display: block;
+                    width: 65px;
+                    height: 20px;
+                    border: 1px solid #d3d3d3;
+                    text-decoration: none;
+                    color: #5a5a5a;
+                    text-align: center;
+                    background-position: 49px;
+                }
+
+                .pages li a.current {
+                    border: 1px solid #FE400D;
+                    color: #FE400D;
+                }
+
+                .pages li a:hover {
+                    color: #F30;
+                    border: 1px solid #f30;
+                }
+
+        .pages .txt {
+            width: 35px;
+            border: 1px solid #D3D3D3;
+            margin: 0px 3px;
+        }
+
+        .pages .btn {
+            width: 40px;
+            height: 20px;
+            background: url(http://file.etschina.com/Static/ETS/main/bo.png) center repeat-x;
+            border: 1px solid #adadad;
+            cursor: pointer;
+        }
+
+    .operating_down {
+        position: absolute;
+        width: 102px;
+        height: auto;
+        z-index: 1000;
+        left: -20px;
+    }
+
+        .operating_down .operating_top {
+            width: 102px;
+            height: 9px;
+            background: url(http://file.etschina.com/Static/ETS/main/png.png) -167px -282px no-repeat;
+        }
+
+        .operating_down .operating_conter {
+            width: 102px;
+            height: auto;
+            background: url(http://file.etschina.com/Static/ETS/main/xlbg.png) center repeat-y;
+        }
+
+            .operating_down .operating_conter ul li {
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                border-bottom: 1px dashed #ebebeb;
+                width: 80px;
+                margin-left: 12px;
+            }
+
+                .operating_down .operating_conter ul li a {
+                    color: #696969;
+                    text-decoration: none;
+                }
+
+                    .operating_down .operating_conter ul li a:Hover {
+                        color: #000;
+                        text-decoration: underline;
+                    }
+
+        .operating_down .operating_bottom {
+            width: 102px;
+            height: 9px;
+            background: url(http://file.etschina.com/Static/ETS/main/png.png) -167px -303px no-repeat;
+        }
+
+    .popup_box {
+        position: absolute;
+        width: 445px;
+        height: auto;
+        z-index: 9999;
+        right: 30%;
+    }
+
+    .popup_box_one {
+        width: 700px;
+        height: auto;
+        position: absolute;
+        z-index: 9999;
+        right: 30%;
+    }
+
+    .box_top_left {
+        width: 8px;
+        height: 36px;
+        background: url(http://file.etschina.com/Static/ETS/main/png.png) -200px -330px no-repeat;
+    }
+
+    .box_top_conter {
+        height: 36px;
+        background: url(http://file.etschina.com/Static/ETS/main/box_top_bg.png) repeat-x;
+    }
+
+    .box_title {
+        width: auto;
+        height: 14px;
+        color: #3a3a3a;
+        float: left;
+        line-height: 20px;
+        padding-left: 8px;
+    }
+
+    .closebotton {
+        width: 14px;
+        height: 14px;
+        float: right;
+        margin: 2px 8px 0px 0px;
+    }
+
+        .closebotton a {
+            width: 14px;
+            height: 14px;
+            display: block;
+            background: url(http://file.etschina.com/Static/ETS/main/png.png) -117px -326px no-repeat;
+        }
+
+            .closebotton a:hover {
+                background: url(http://file.etschina.com/Static/ETS/main/png.png) -145px -326px no-repeat;
+            }
+
+    .box_top_right {
+        width: 8px;
+        height: 36px;
+        background: url(http://file.etschina.com/Static/ETS/main/png.png) -286px -330px no-repeat;
+    }
+
+    .box_font_1 {
+        font-size: 14px;
+        color: #ff5400;
+        font-weight: bold;
+        line-height: 26px;
+    }
+
+    .box_font_2 {
+        color: #727272;
+    }
+
+    .box_conter_left {
+        width: 8px;
+        background: url(http://file.etschina.com/Static/ETS/main/box_left_bg.png) right repeat-y;
+    }
+
+    .box_conter_con {
+        background: #fff;
+    }
+
+    .box_content {
+        width: 80%;
+        height: auto;
+        padding: 20px 0px;
+        margin: 0 auto;
+    }
+
+        .box_content .con_leftp {
+            width: 68px;
+            height: 68px;
+            background: url(http://file.etschina.com/Static/ETS/main/png.png) 0px -409px no-repeat;
+            float: left;
+        }
+
+        .box_content .con_leftd {
+            width: 68px;
+            height: 68px;
+            background: url(http://file.etschina.com/Static/ETS/main/png.png) -84px -410px no-repeat;
+            float: left;
+        }
+
+        .box_content .con_leftdel {
+            width: 68px;
+            height: 68px;
+            background: url(http://file.etschina.com/Static/ETS/main/png.png) -168px -410px no-repeat;
+            float: left;
+        }
+
+    .conrightp {
+        float: left;
+        width: 255px;
+        padding-left: 10px;
+    }
+
+    .box_conter_right {
+        width: 8px;
+        background: url(http://file.etschina.com/Static/ETS/main/box_right_bg.png) left repeat-y;
+    }
+
+    .box_botton {
+        width: auto;
+        height: 28px;
+        text-align: right;
+        padding-top: 10px;
+    }
+
+    .button_Save {
+        width: 78px;
+        height: 28px;
+        background: url(http://file.etschina.com/Static/ETS/main/png.png) 0px -238px no-repeat;
+        border: none;
+        color: #fff;
+        text-align: center;
+        line-height: 25px;
+        cursor: pointer;
+    }
+
+    .button_qx {
+        width: 78px;
+        height: 28px;
+        background: url(http://file.etschina.com/Static/ETS/main/png.png) -115px -359px no-repeat;
+        border: none;
+        color: #4b4b4b;
+        text-align: center;
+        line-height: 25px;
+        cursor: pointer;
+    }
+
+
+    .box_bottom_left {
+        width: 8px;
+        height: 8px;
+        background: url(http://file.etschina.com/Static/ETS/main/png.png) -200px -376px no-repeat;
+    }
+
+    .box_bottom_center {
+        height: 8px;
+        background: url(http://file.etschina.com/Static/ETS/main/box_bottom_bg.png) top repeat-x;
+    }
+
+    .box_bottom_right {
+        width: 8px;
+        height: 8px;
+        background: url(http://file.etschina.com/Static/ETS/main/png.png) -286px -376px no-repeat;
+    }

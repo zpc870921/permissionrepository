@@ -1,0 +1,8 @@
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Model\bin\Debug\EFFrameTest2.Model.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Model\bin\Debug\EFFrameTest2.Model.pdb
+E:\其他文件\Test\TestDistributeApp\Assembly\EFFrameTest2.Model.dll
+E:\其他文件\Test\TestDistributeApp\Assembly\EFFrameTest2.Model.pdb
+E:\其他文件\Test\TestDistributeApp\WebApplication1\Assembly\EFFrameTest2.Model.dll
+E:\其他文件\Test\TestDistributeApp\WebApplication1\Assembly\EFFrameTest2.Model.pdb
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Model\obj\Debug\EFFrameTest2.Model.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Model\obj\Debug\EFFrameTest2.Model.pdb

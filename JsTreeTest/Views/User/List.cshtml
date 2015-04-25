@@ -1,0 +1,146 @@
+﻿@using EFFrameTest2.Model.Entites
+
+@{
+    ViewBag.Title = "用户列表";
+}
+
+<h2>用户列表</h2>
+<style type="text/css">
+    /*.optMenu .navbar .nav > li > a {
+        padding: 5px;
+    }*/
+
+    .optMenu .dropdown-menu {
+        min-width: 80px;
+    }
+</style>
+
+<ul class="breadcrumb hints">
+    <li><a href="">首页</a></li>
+    <li><a href="#">系统管理</a></li>
+    <li class="active">用户列表</li>
+    <li class="pull-right"><a href="@Url.Action("add")" id="userAdd" class="btn btn-primary">添加新用户</a></li>
+    <li class="pull-right" id="btnSaveMove" style="margin-left: 10px;">
+        <a href="@Url.Action("modules","system")" class="btn btn-primary">模块列表</a>
+    </li>
+    <li class="pull-right" style="margin-left:10px;"><a href="@Url.Action("roles","system")" id="moduleAdd" class="btn btn-primary">角色列表</a></li>
+</ul>
+
+<input type="text" id="keyword" name="keyword" value="" /><input type="button" id="btnsearch" value="搜索" />
+
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>名称</th>
+            <th>创建日期</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody id="datacontainer"></tbody>
+</table>
+<div id="demo5"></div>
+<script type="text/x-jquery-tmpl" id="itemtmpl">
+    <tr>
+        <td>${Id}</td>
+        <td>${UserName}</td>
+        <td>${globalobj.formatDate(CreateTime)}</td>
+        <td class="optMenu">
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">操作 <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="@Url.Action("Add")/${Id}" class="dev-edit {role:{id:${Id}}}">编辑</a></li>
+                    <li><a href="javascript:void(0);" class="dev-delete {notice:{usestate : ${Id}}}">删除</a></li>
+                    <li><a href="@Url.Action("setrerolemodule")/${Id}">配置权限</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+</script>
+@section scripts{
+    <script src="~/Scripts/jquery.tmpl.min.js"></script>
+    <script src="~/Scripts/jquery.pager.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            loaddata(1);
+            $("#btnsearch").click(function () {
+                loaddata(1);
+            });
+            $("#userAdd").click(function () {
+
+            });
+        })
+
+        var globalobj = {
+            formatDate: function (d) {
+                var currentDate =new Date(parseInt(d.replace("/Date(", "")));
+                return currentDate.getFullYear() + "-" + this.getMonth(currentDate.getMonth() + 1) + "-" + this.getMonth(currentDate.getDate());
+            },
+            getMonth:function(m){
+                if(m<9){
+                    return "0"+m;
+                }
+                return m;
+            },
+            addUser: function () {
+                
+            }
+        };
+
+        function loaddata(page) {
+            $("#demo5,#datacontainer").empty();
+
+            var param=[];
+            param.push({name:"pageIndex",value:page});
+            param.push({ name: "pageSize",value:10});
+            var hidkeyword=$("#keyword").val();
+
+            if (hidkeyword && hidkeyword.length > 0) {
+                param.push({ name: "keyword", value: hidkeyword });
+            }
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("ListJson")",
+                data: param,
+                success: function (d) {
+                    debugger
+                    $("#datacontainer").append($("#itemtmpl").tmpl(d.data));
+                    var count = d.count;
+                    if (count > 10) {
+                        $("#demo5").paginate({
+                            count: Math.ceil(d.count / 10),
+                            start: page,
+                            display: 5,
+                            border: false,
+                            text_color: '#888',
+                            background_color: '#EEE',
+                            text_hover_color: 'black',
+                            images: false,
+                            rotate: false,
+                            mouse: 'press',
+                            onChange: function (page) {
+                                loaddata(page);
+                            }
+                        });
+                    }
+                },
+                error: function (e) {
+                    alert(e.responseText);
+                }
+            });
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

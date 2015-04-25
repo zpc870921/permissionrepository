@@ -1,0 +1,4 @@
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Model\bin\Debug\EFFrameTest.Model.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Model\bin\Debug\EFFrameTest.Model.pdb
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Model\obj\Debug\EFFrameTest.Model.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Model\obj\Debug\EFFrameTest.Model.pdb

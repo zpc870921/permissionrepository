@@ -1,0 +1,145 @@
+﻿@using EFFrameTest2.Model.Entites
+@using JsTreeTest.Models.VO
+@model UserVO
+@{
+    ViewBag.Title = "添加用户";
+    User emp = Model.User;
+}
+
+<h2>Add</h2>
+
+<ul class="breadcrumb hints">
+    <li><a href="#">首页</a> </li>
+    <li><a href="#">系统管理</a></li>
+    <li class="active">模块列表</li>
+    <li class="pull-right" id="btnSaveMove" style="margin-left: 10px;">
+        <a href="@Url.Action("modules")" class="btn btn-primary">模块列表</a>
+    </li>
+    <li class="pull-right" style="margin-left:10px;"><a href="@Url.Action("roles")" id="moduleAdd" class="btn btn-primary">角色列表</a></li>
+    <li class="pull-right" style="margin-left:10px;"><a href="@Url.Action("list","user")" id="moduleEdit" class="btn btn-primary">用户列表</a></li>
+    @*<li class="pull-right" style="margin-left:10px;"><a href="javascript:void(0);" id="moduleDel" class="btn btn-primary">删除模块</a></li>*@
+</ul>
+<form method="post" class="form-horizontal" data-tabops="1">
+    @Html.Hidden("Id",emp!=null&&emp.Id>0?emp.Id:0)
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="name">姓名：</label>
+        <div class="col-lg-3">
+            @Html.TextBox("username", emp == null ? "" : emp.UserName, new { @class = "form-control required" })
+        </div>
+    </div>
+    @*<div class="form-group">
+        <label class="col-lg-2 control-label" for="name">员工编号：</label>
+        <div class="col-lg-3">
+            @Html.TextBox("employeenumber", Model == null ? "" : member.EmployeeNumber, new { @class = "form-control required" })
+        </div>
+    </div>*@
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="name">籍贯：</label>
+        <div class="col-lg-3">
+            @Html.TextBox("nativeplace", emp == null ? "" : emp.NativePlace, new { @class = "form-control required" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="name">身份证号：</label>
+        <div class="col-lg-3">
+            @Html.TextBox("IDCard", emp == null ? "" : emp.IDCard, new { @class = "form-control required" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="name">微信号：</label>
+        <div class="col-lg-3">
+            @Html.TextBox("weixin", emp == null ? "" : emp.WeiXin, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="name">邮件：</label>
+        <div class="col-lg-3">
+            @Html.TextBox("email", emp == null ? "" : emp.Email, new { @class = "form-control required email" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="mobile">角色：</label>
+        <div class="col-lg-8">
+
+            @{
+                if(Model.RoleList!=null&&Model.RoleList.Any())
+                {
+                    foreach(var item in Model.RoleList)
+                    {
+                        <input type="checkbox" name="rolelist" value="@item.Id" @((emp != null && emp.RoleList != null && emp.RoleList.Any())&&emp.RoleList.Select(r=>r.RoleId).Contains(item.Id)?"checked=checked":"") />@item.Name   
+                    }
+                }
+            }
+
+            @*@if (Html.Authority().HasAuth(PageOperation.RoleManager))
+            {
+                foreach (var item in Model.RoleItems)
+                {
+                    <label class="checkbox-inline">
+                        <input name="roles" type="checkbox" value="@item.Value" @(item.Selected ? "checked" : "") />@item.Text
+                    </label>
+                }
+            }
+            else
+            {
+                if (null != Model && Model.RoleItems != null && Model.RoleItems.Any())
+                {
+                    @String.Join("、", Model.RoleItems.Select(r => r.Text))
+                }
+
+                @Html.Hidden("roles", String.Join(",", Model.RoleItems.Select(r => r.Value)))
+            }*@
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="mobile">手机：</label>
+        <div class="col-lg-3">
+            @Html.TextBox("mobile", emp == null ? "" : emp.Mobile, new { @class = "form-control required" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="name">电话：</label>
+        <div class="col-lg-3">
+            @Html.TextBox("Tel", emp == null ? "" : emp.Tel, new { @class = "form-control required" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="qq">QQ：</label>
+        <div class="col-lg-2">
+            @Html.TextBox("qq", emp == null ? "" : emp.QQ, new { @class = "form-control input" })
+        </div>
+    </div>
+    @*<div class="form-group">
+        <label class="col-lg-2 control-label" for="qq">上传头像：</label>
+        <div class="col-lg-2">
+            @{
+                if (member != null && !string.IsNullOrWhiteSpace(member.Photo))
+                {
+                    var arr = member.Photo.Split('/');
+                    var fileName = arr[arr.Length - 1];
+                    <div class="upload" data-uploaddata="[{'local':'@fileName','remote':'@member.Photo'}]"></div>
+                }
+                else
+                {
+                    <div class="upload" data-uploaddata="[]"></div>
+                }
+            }
+        </div>
+    </div>*@
+
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+            <button type="submit" class="btn btn-primary">确认提交</button>
+            <button type="button" class="btn">取消</button>
+
+        </div>
+    </div>
+</form>

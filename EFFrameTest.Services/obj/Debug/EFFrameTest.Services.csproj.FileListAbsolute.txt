@@ -1,0 +1,10 @@
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Services\bin\Debug\EFFrameTest.Services.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Services\bin\Debug\EFFrameTest.Services.pdb
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Services\obj\Debug\EFFrameTest.Services.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Services\obj\Debug\EFFrameTest.Services.pdb
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Services\bin\Debug\EFFrameTest.Data.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Services\bin\Debug\EFFrameTest.Model.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Services\bin\Debug\EntityFramework.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Services\bin\Debug\EFFrameTest.Data.pdb
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Services\bin\Debug\EFFrameTest.Model.pdb
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Services\obj\Debug\EFFrameTest.Services.csprojResolveAssemblyReference.cache

@@ -1,0 +1,342 @@
+﻿@using System.Collections.Generic;
+@model IDictionary<int, string>
+@{
+    ViewBag.Title = "Modules";
+}
+<link href="~/Scripts/jquery.JsTree/themes/apple/style.css" rel="stylesheet" />
+<style type="text/css">
+    #treeModule li {
+        /*padding: 5px;*/
+    }
+</style>
+<h2>Modules</h2>
+
+<ul class="breadcrumb hints">
+    <li><a href="#">首页</a> </li>
+    <li><a href="#">系统管理</a></li>
+    <li class="active">模块列表</li>
+    <li class="pull-right" id="btnSaveMove" style="margin-left: 10px;"><a href="javascript:void(0);" class="btn btn-warning">保存更改</a></li>
+    <li class="pull-right" style="margin-left:10px;"><a href="javascript:void(0);" id="moduleAdd" class="btn btn-primary">添加新模块</a></li>
+    <li class="pull-right" style="margin-left:10px;"><a href="javascript:void(0);" id="moduleEdit" class="btn btn-primary">修改模块</a></li>
+    <li class="pull-right" style="margin-left:10px;"><a href="javascript:void(0);" id="moduleDel" class="btn btn-primary">删除模块</a></li>
+    <li class="pull-right" style="margin-left:10px;"><a href="@Url.Action("list","user")" id="moduleEdit" class="btn btn-primary">用户列表</a></li>
+    <li class="pull-right" style="margin-left:10px;"><a href="@Url.Action("roles","system")" id="moduleEdit" class="btn btn-primary">角色列表</a></li>
+</ul>
+
+<div id="treeModule">
+</div>
+
+<div class="modal fade" id="managerPannel">
+
+</div>
+
+<script type="text/x-jquery-tmpl" id="tmpManager">
+    <div class="modal-dialog">
+        <form id="formManager" method="post" class="form-horizontal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">{{if Id}}修改{{else}}添加{{/if}}模块</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="control-group">
+                        <label class="control-label" for="inputName">名称</label>
+                        <div class="controls">
+                            <input type="text" id="inputName" name="name" value="${Name}" placeholder="名称" class="required">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputUrl">链接地址</label>
+                        <div class="controls">
+                            <input type="text" id="inputUrl" name="url" value="${Url}" placeholder="选填">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputTarget">窗口打开目标</label>
+                        <div class="controls">
+                            <input type="text" id="inputTarget" name="target" value="${Target}" placeholder="目标">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputOrderVal">同级别排序值</label>
+                        <div class="controls">
+                            <input type="text" id="inputOrderVal" name="orderval" value="${OrderVal}" placeholder="目标">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputOrderVal">Attributes</label>
+                        <div class="controls">
+                            <input type="text" id="inputAttributes" name="attributes" value="${Attributes}" placeholder="Attributes属性">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="boxIsMenu">是否导航菜单</label>
+                        <div class="controls">
+                            <input type="checkbox" id="boxIsMenu" value="1" name="isMenu" {{if IsMenu}}checked="checked" {{/if}}/>
+                            是
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">模块功能</label>
+
+                        <div class="controls">
+                    @foreach (var item in Model)
+                    {
+            @:<input type="checkbox" name="optcode[]" value="@item.Key" class="required" {{if OptCode}}${splitCode(OptCode,'@item.Key')}{{/if}} /> @item.Value
+                    }
+                            
+                        </div>
+                    </div>
+                    <div class="alert alert-erro hide"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</a>
+                    <a href="javascript:" class="btn btn-primary" id="btnSave" data-id="${Id}" onclick="javascript:submitOrganizeData(this);">提交</a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</script>
+
+@section scripts{
+<script src="~/Scripts/jquery.tmpl.min.js"></script>
+<script src="~/Scripts/jquery.JsTree/jquery.jstree.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/form2js.js"></script>
+    <script type="text/javascript">
+        function splitCode(code, val)
+        {
+            var arr = code.split(',');
+            if (arr.length <= 0) {
+                return '';
+            }
+            if ($.inArray(val, arr) > -1) {
+                return 'checked';
+            }
+            return '';
+        }
+
+        function submitOrganizeData(obj) {
+           
+            var form = $(obj).parents('form')[0];
+            var result = $(form).valid();
+            if (!result) {
+                return;
+            }
+            var data = form2js(form, '.', true);
+            data.optcode = data.optcode.join();
+            data.id = $(obj).data('id');
+            //如果获取到父节点那就可以不用整个树提交了
+            //父节点---当前选中的节点
+            data.parentid = $("#treeModule").jstree("get_selected").data("id");
+            $.post('/TestJsTree/system/ModuleManager', data, function (ret) {
+                if (ret.id > 0) {
+                    if (data.id <= 0) {
+                        data.id = ret.id;
+                        $('#treeModule').jstree('create', null, 'last', { data: data.name, attr: { 'data-id': ret.id } }, null, true);
+                        //直接创建dom
+                        var hiddenhtml = '<input type="hidden" name="hidtarget" value="' + data.target + '" />' +
+                                    '<input type="hidden" name="hidurl" value="' + data.url + '" />' +
+                                     '<input type="hidden" name="hidname" value="' + data.name + '" />' +
+                                    '<input type="hidden" name="hidrderval" value="' + data.orderval + '" />' +
+                                    '<input type="hidden" name="hidismenu" value="' + data.ismenu + '" />' +
+                                    '<input type="hidden" name="hidtype" value="' + data.type + '" />' +
+                                    '<input type="hidden" name="hidmaxleavel" value="' + data.maxleavel + '" />' +
+                                    '<input type="hidden" name="hidattributes" value="' + data.attributes + '" />' +
+                                    '<input type="hidden" name="hidoptcode" value="' + data.optcode + '" />';
+                        $("#treeModule li[data-id=" + ret.id + "]").append(hiddenhtml);
+                    }
+                    else {
+                        $('#treeModule').jstree('set_text', null, data.name);
+                    }
+                    $('#managerPannel').modal('hide');
+                }
+                else {
+                    $('.alert-erro', form).show().html(ret.msg);
+                }
+            });
+        }
+
+        function tiggerTree() {
+            var treeData = [];
+            $('li[id!="root_treeModule"]', '#treeModule').each(function (i, n) {
+                var PermissionModule = {
+                    ParentId: 0,
+                    Id: $(this).data('id'),
+                    Name: $(this).find(":hidden[name=hidname]").val(),
+                    Url: $(this).find(":hidden[name=hidurl]").val(),
+                    Target: $(this).find(":hidden[name=hidtarget]").val(),
+                    IsMenu: $(this).find(":hidden[name=hidismenu]").val(),
+                    Type: $(this).find(":hidden[name=hidtype]").val(),
+                    OrderVal: $(this).find(":hidden[name=hidorderval]").val(),
+                    Attributes: $(this).find(":hidden[name=hidattributes]").val(),
+                    OptCode: $(this).find(":hidden[name=hidoptcode]").val(),
+                    MaxLeavel: $(this).find(":hidden[name=hidmaxleavel]").val(),
+                };
+                //设置子节点
+                var childliids = $("ul:first>li", this);
+                if (childliids.length > 0)
+                {
+                    var childidarr=[];
+                    childliids.each(function(i,v){
+                        childidarr.push($(v).data("id"));
+                    });
+                    PermissionModule.ChildNodes = childidarr.join();
+                }
+                //设置父节点
+                var domParents = $(this).parents('li');
+                var count = domParents.length;
+                PermissionModule.ParentId = $(domParents[0]).data("id");
+                treeData.push(PermissionModule);
+            });
+            $.ajax({
+                type: "POST",
+                cache: false,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({ tree: treeData }),
+                url: "/TestJsTree/system/ModulesTree",
+                success: function (retData) {
+                    if (retData.ret && retData.ret > 0) {
+                        alert("修改成功");
+                    }
+                    else {
+                        alert('修改失败');
+                    }
+                },
+                error: function (e) {
+                    alert(e.responseText);
+                }
+            });
+        }
+
+        $(function () {
+            $('#btnSaveMove').click(function () {
+                tiggerTree();
+            });//btnSaveMove click....
+
+            $("#moduleDel").click(function () {
+                var currentNode = $("#treeModule").jstree("get_selected");
+                if (currentNode.length == 0)
+                {
+                    var msgdialog = ' <div class="modal-dialog">   <div class="modal-content">' +
+           '<div class="modal-header">' +
+               '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+               '<h4 class="modal-title">提示</h4>' +
+           '</div>' +
+           '<div class="modal-body">' +
+           '请选择要删除的模块</div>' +
+           '<div class="modal-footer">' +
+             '<a href="#" class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</a>' +
+               '<a href="javascript:" class="btn btn-primary">提交</a>' +
+           '</div>'
+                    $("#managerPannel").empty().append(msgdialog).modal("toggle");
+                    return;
+                }
+
+                $("#treeModule").jstree("remove");
+
+            });
+
+            $("#moduleEdit").click(function () {
+                var currentNode=$("#treeModule").jstree("get_selected");
+                if (currentNode.length == 0)
+                {
+                    var msgdialog = ' <div class="modal-dialog">   <div class="modal-content">' +
+                '<div class="modal-header">' +
+                    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                    '<h4 class="modal-title">提示</h4>' +
+                '</div>' +
+                '<div class="modal-body">' +
+                '请选择要编辑的模块</div>' +
+                '<div class="modal-footer">' +
+                  '<a href="#" class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</a>' +
+                    '<a href="javascript:" class="btn btn-primary">提交</a>' +
+                '</div>'
+                    $("#managerPannel").empty().append(msgdialog).modal("toggle");
+                    return;
+                }
+                $.post('/TestJsTree/System/getmodule', { id: currentNode.data("id") }, function (d) {
+                    $("#managerPannel").empty().append($("#tmpManager").tmpl(d)).modal("toggle");
+                });
+            });
+
+            $("#moduleAdd").click(function () {
+                if ($("#treeModule").jstree('get_selected').length == 0)
+                {
+                    var msgdialog = ' <div class="modal-dialog">   <div class="modal-content">'+
+                '<div class="modal-header">'+
+                    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>'+
+                    '<h4 class="modal-title">提示</h4>'+
+                '</div>'+
+                '<div class="modal-body">' +
+                '请选择上一级</div>' +
+                '<div class="modal-footer">'+
+                  '<a href="#" class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</a>'+
+                    '<a href="javascript:" class="btn btn-primary">提交</a>'+
+                '</div>'
+                    $("#managerPannel").empty().append(msgdialog).modal("toggle");
+                    return;
+                }
+                var html = $("#tmpManager").tmpl(null);
+                $("#managerPannel").empty().append(html).modal("toggle");
+            });
+
+            $('#treeModule').jstree({
+                core: {
+                    "initially_open": ["root_treeModule"],
+                    //"variant": "large",
+                    // "multiple": true,
+                    // "animation": 0
+                },
+                //"checkbox": {
+                //    "keep_selected_style": false
+                //},
+                "plugins": ["themes", "html_data", "ui", "crrm", "dnd", "types"],
+                html_data: {
+                    "data": "<li class='jstree-closed' data-id='0' id='root_treeModule'><a href='javascript:void(0);'>模块列表</a></li>",
+                    'ajax': {
+                        url: '/TestJsTree/system/ModuleChildren',
+                        type:"POST",
+                        data: function (n) {
+                            return { root: $(n).data('id') };
+                        },
+                        success: function (ret) {
+
+                            if (ret == '' || ret == "[]") {
+                                return '';
+                            }
+                            ret = $.parseJSON(ret);
+                            var html = "";
+                            $.each(ret, function (i, n) {
+                                html += '<li  ';
+                                if (n.ChildNodes && n.ChildNodes.length>0) {
+                                    html += 'class="jstree-closed"';
+                                }
+                                html += ' data-id="' + n.Id + '"><a href="javascript:void(0);">' + n.Name + '</a><input type="hidden" name="hidtarget" value="' + n.Target + '" />' +
+                                    '<input type="hidden" name="hidurl" value="' + n.Url + '" />' +
+                                     '<input type="hidden" name="hidname" value="' + n.Name + '" />' +
+                                    '<input type="hidden" name="hidrderval" value="' + n.OrderVal + '" />' +
+                                    '<input type="hidden" name="hidismenu" value="' + n.IsMenu + '" />' +
+                                    '<input type="hidden" name="hidtype" value="' + n.Type + '" />' +
+                                    '<input type="hidden" name="hidmaxleavel" value="' + n.MaxLeavel + '" />' +
+                                    '<input type="hidden" name="hidattributes" value="' + n.Attributes + '" />' +
+                                    '<input type="hidden" name="hidoptcode" value="' + n.OptCode + '" /></li>';
+                            });
+                            return html;
+                        }
+                    }
+                }
+            })//jstree....
+           .bind('move_node.jstree', function (e, data) {
+               $('#btnSaveMove').show('slow');
+           });
+            //.bind('loaded.jstree', function (event, data) {
+          //  $(this).jstree("open_all");
+        //});
+        })
+    </script>
+    }

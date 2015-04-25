@@ -1,0 +1,34 @@
+﻿<#+
+// <copyright file="HelloWorldTemplate.tt" company="邹鹏诚@中国">
+//  Copyright © 邹鹏诚@中国. All Rights Reserved.
+// </copyright>
+
+public class HelloWorldTemplate : CSharpTemplate
+{
+	private string _className;
+	public HelloWorldTemplate(string className)
+	{
+		_className=className;
+	}
+	public override string TransformText()
+	{
+		
+#>
+using System;
+namespace EFFrameTest2.Data.T4
+{
+	public class <#= _className #>
+	{
+		private string _word;
+
+		public <#=_className#>(string word)
+		{
+			_word=word;
+		}
+	}
+}
+<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>

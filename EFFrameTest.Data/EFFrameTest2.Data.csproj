@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{249DA1E0-2C1A-4562-9B28-7E4776064C27}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EFFrameTest2.Data</RootNamespace>
+    <AssemblyName>EFFrameTest2.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\PermissionModuleConfigurationMap.cs" />
+    <Compile Include="Configuration\PermissionReRoleModuleConfigurationMap.cs" />
+    <Compile Include="Configuration\PermissionRoleConfigurationMap.cs" />
+    <Compile Include="Configuration\UserMap.cs" />
+    <Compile Include="Configuration\UserReRoleMap.cs" />
+    <Compile Include="ContactRepostory.cs" />
+    <Compile Include="Infrastructure\DatabaseFactory.cs" />
+    <Compile Include="Infrastructure\Disposable.cs" />
+    <Compile Include="Infrastructure\ExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\IDatabaseFactory.cs" />
+    <Compile Include="Infrastructure\ContactDbContext.cs" />
+    <Compile Include="Infrastructure\IRepository.cs" />
+    <Compile Include="Infrastructure\IUnitOfWork.cs" />
+    <Compile Include="Infrastructure\ParameterRebinder.cs" />
+    <Compile Include="Infrastructure\RepositoryBase.cs" />
+    <Compile Include="Infrastructure\UnityOfWork.cs" />
+    <Compile Include="LodgingRepository.cs" />
+    <Compile Include="Migrations\201412210406403_adddb5.cs" />
+    <Compile Include="Migrations\201412210406403_adddb5.Designer.cs">
+      <DependentUpon>201412210406403_adddb5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504110558289_20150411.cs" />
+    <Compile Include="Migrations\201504110558289_20150411.Designer.cs">
+      <DependentUpon>201504110558289_20150411.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504141352541_201504142152.cs" />
+    <Compile Include="Migrations\201504141352541_201504142152.Designer.cs">
+      <DependentUpon>201504141352541_201504142152.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504231258480_addchildnodes.cs" />
+    <Compile Include="Migrations\201504231258480_addchildnodes.Designer.cs">
+      <DependentUpon>201504231258480_addchildnodes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504231410162_modifyuser.cs" />
+    <Compile Include="Migrations\201504231410162_modifyuser.Designer.cs">
+      <DependentUpon>201504231410162_modifyuser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ProductRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\PermissionModuleRepository.cs" />
+    <Compile Include="Repository\PermissionReRoleModuleRepostory.cs" />
+    <Compile Include="Repository\PermissionRoleRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Repository\UserReRoleRepository.cs" />
+    <Compile Include="ResortRepository.cs" />
+    <Compile Include="T4\HelloWorld.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HelloWorld.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HelloWorldMulti.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HelloWorldMulti.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\outPath\HelloWorld1.cs" />
+    <Compile Include="T4\outPath\HelloWorld2.cs" />
+    <Compile Include="T4\outPath\HelloWorld3.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="CodeTemplates\DbHelper.ttinclude" />
+    <None Include="CodeTemplates\Manager.ttinclude" />
+    <None Include="packages.config" />
+    <None Include="T4\EntityConfigTemplate.tt" />
+    <None Include="T4\GeneratorTemplate.tt" />
+    <None Include="T4\HelloWorld.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HelloWorld.cs</LastGenOutput>
+    </None>
+    <None Include="T4\HelloWorldMulti.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HelloWorldMulti.cs</LastGenOutput>
+      <LastOutputs>
+.\HelloWorldMulti.cs
+.\outPath\HelloWorld1.cs
+.\outPath\HelloWorld2.cs
+.\outPath\HelloWorld3.cs
+</LastOutputs>
+    </None>
+    <None Include="T4\HelloWorldTemplate.tt" />
+    <None Include="T4\RepositoryTemplate.tt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EFFrameTest.Model\EFFrameTest2.Model.csproj">
+      <Project>{a15bad14-ffe2-4036-8980-94db097a039a}</Project>
+      <Name>EFFrameTest2.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201412210406403_adddb5.resx">
+      <DependentUpon>201412210406403_adddb5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504110558289_20150411.resx">
+      <DependentUpon>201504110558289_20150411.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504141352541_201504142152.resx">
+      <DependentUpon>201504141352541_201504142152.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504231258480_addchildnodes.resx">
+      <DependentUpon>201504231258480_addchildnodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504231410162_modifyuser.resx">
+      <DependentUpon>201504231410162_modifyuser.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

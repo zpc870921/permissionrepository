@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "TestJq";
+}
+
+<h2>TestJq</h2>
+
+
+
+<ul id="ultest">
+    <li>第一行
+        <ul>
+            <li>第一行1111
+                <ul>
+                    <li id="tetli">第一行2222</li>
+                    <li>第二行2222</li>
+                    <li>第三行2222</li>
+                </ul>
+            </li>
+            <li>第二行1111</li>
+            <li>第三行1111</li>
+        </ul>
+    </li>
+    <li>第二行</li>
+    <li id="threeli">第三行</li>
+</ul>
+
+@section scripts{
+    <script>
+        $(function () {
+            var arr = [];
+            var result= $("#tetli").parents("li");
+            //$("li[id!=threeli]", "#ultest").each(function (i, v) {
+            //    $(this).parents("li");
+            //});
+        })
+    </script>
+    }

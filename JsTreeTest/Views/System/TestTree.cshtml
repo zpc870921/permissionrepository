@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "TestTree";
+}
+
+<h2>TestTree</h2>
+<link href="~/Scripts/jquery.JsTree/themes/apple/style.css" rel="stylesheet" />
+
+<div id="treeModule" data-id="0">
+
+</div>
+
+@section scripts{
+<script src="~/Scripts/jquery.JsTree/jquery.jstree.js"></script>
+    <script type="text/javascript">
+        $(function () {
+           
+            $("#treeModule").jstree({
+                "themes": {
+                    "theme": "default"
+                },
+                "core": {
+                    "initially_open": ["treeModule_node"],
+                    @*"data": {
+                        "url": "@Url.Action("ModuleChildrenJson")",
+                        "data": function (node) {
+                            debugger
+                            return { id: (!node||node.id=="0")? "0" : node.id };
+                        },
+                        "dataType":"json"
+                    }*@
+                },
+                "types": {
+                    "types":
+                                {
+                                    "person": { "icon": { "image": "http://www.jstree.com/tree-icon.png"} },
+                                    "depar2": { "icon": { "image": "/TestJsTree/Scripts/jquery.JsTree/themes/default/d.gif", position: '-56px -19px' } },
+                                    "default": { "icon": { "image": "http://www.jstree.com/tree-icon.png"} }
+                                }
+                },
+                "plugins": ["themes", "html_data", "crrm", "ui", "types", "dnd"],
+                "html_data": {
+                    "data": "<li class='jstree-closed' data-id='0' id='treeModule_node' rel='depar2'><a href='javascript:void(0);'>模块列表</a></li>",
+                    "ajax": {
+                        "url": "@Url.Action("ModuleChildren")",
+                        "type":"POST",
+                        "data": function (n) {
+                            return {"root":$(n).data("id")};
+                        },
+                        "success": function (d) {
+                            if (d == '' || d == '[]') {
+                                return '';
+                            }
+                            var jsondata = JSON.parse(d);
+                            var html = '';
+                            $(jsondata).each(function (i, v) {
+                                var iconstyle = 'person';
+                                if (v.HasChild) {
+                                    iconstyle = "depar2";
+                                }
+                                html += '<li rel="' + iconstyle + '"';
+                                if (v.HasChild) {
+                                    html += 'class="jstree-closed"';
+                                } 
+                                html += " data-id='"+v.Id+"'><a href='javascript:void(0);'>"+v.Name+"</a></li>";
+                            });
+                            return html;
+                        }
+                    }
+                }
+            });
+        })
+    </script>
+    }

@@ -1,0 +1,23 @@
+﻿@using EFFrameTest2.Model.Entites;
+@model User
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<ul class="breadcrumb hints">
+    <li><a href="#">首页</a> </li>
+    <li><a href="#">系统管理</a></li>
+    <li class="active">模块列表</li>
+    <li class="pull-right" id="btnSaveMove" style="margin-left: 10px;"><a href="@Url.Action("modules")" class="btn btn-primary">模块列表</a>
+    </li>
+    <li class="pull-right" style="margin-left:10px;"><a href="@Url.Action("roles")" id="moduleAdd" class="btn btn-primary">角色列表</a></li>
+    <li class="pull-right" style="margin-left:10px;"><a href="@Url.Action("list","user")" id="moduleEdit" class="btn btn-primary">用户列表</a></li>
+    @*<li class="pull-right" style="margin-left:10px;"><a href="javascript:void(0);" id="moduleDel" class="btn btn-primary">删除模块</a></li>*@
+</ul>
+登陆后才能访问
+@{
+    if (null != Model) { 
+<p>@Model.UserName</p>
+}
+}

@@ -1,0 +1,9 @@
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Data\bin\Debug\EFFrameTest.Data.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Data\bin\Debug\EFFrameTest.Data.pdb
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Data\obj\Debug\EFFrameTest.Data.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Data\obj\Debug\EFFrameTest.Data.pdb
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Data\obj\Debug\EFFrameTest.Data.csprojResolveAssemblyReference.cache
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Data\bin\Debug\EFFrameTest.Model.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Data\bin\Debug\EntityFramework.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Data\bin\Debug\EntityFramework.SqlServer.dll
+E:\其他文件\Test\EFFrameTest\EFFrameTest.Data\bin\Debug\EFFrameTest.Model.pdb
